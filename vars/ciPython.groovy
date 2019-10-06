@@ -10,13 +10,13 @@ def call() {
             skipStagesAfterUnstable()
         }
         stages {
-            stage("Clonning ") {
+            stage("Cloning") {
                 steps {
                     sh "git clone ${params.REPO}"
                     sh "git checkout ${params.BRANCH}"
                 }
             }
-            stage("Bulding ${params.APPNAME}") {
+            stage("Bulding") {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
@@ -28,7 +28,7 @@ def call() {
                     }
                 }
             }
-            stage("Testing ${params.APPNAME}") {
+            stage("Testing") {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
@@ -40,7 +40,7 @@ def call() {
                     }
                 }
             }
-            stage("Packing ${params.APPNAME}") {
+            stage("Packing") {
                 agent any
                 steps {
                     sh "tar -zcvf ${params.APPNAME}-${env.BUILD_NUMBER}.gz ${params.APPNAME}/"
