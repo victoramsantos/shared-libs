@@ -10,13 +10,10 @@ def call() {
             skipStagesAfterUnstable()
         }
         stages {
-            stage("Clonning ${params.APPNAME}") {
-                agent any
+            stage("Clonning ") {
                 steps {
-                    script {
-                        sh "git clone ${params.REPO}"
-                        sh "git checkout ${params.BRANCH}"
-                    }
+                    sh "git clone ${params.REPO}"
+                    sh "git checkout ${params.BRANCH}"
                 }
             }
             stage("Bulding ${params.APPNAME}") {
