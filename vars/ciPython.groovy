@@ -5,7 +5,7 @@ def call(body) {
     body()
 
     pipeline {
-        agent none
+        agent any
         options {
             skipStagesAfterUnstable()
         }
