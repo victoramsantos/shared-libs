@@ -37,16 +37,18 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${this.masterPath}:${this.masterPath} -w ${this.masterPath}"
+                        args "-v ${this.masterPath}:${this.masterPath}"
                     }
                 }
                 steps {
                     dir("${params.REPO}") {
                         script {
-                            pip.install(
-                                    params.PYTHON_VERSION,
-                                    params.REQUIREMENTS
-                            )
+                            dir(this.masterPath) {
+                                pip.install(
+                                        params.PYTHON_VERSION,
+                                        params.REQUIREMENTS
+                                )
+                            }
                         }
                     }
                 }
