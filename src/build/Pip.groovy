@@ -1,10 +1,10 @@
 package build
 
-import utils.PipelineHandler
+import handler.PipelineHandler
 
 class Pip extends PipelineHandler{
-    Pip(Object steps) {
-        super(steps)
+    Pip(Object pipelineContext) {
+        super(pipelineContext)
     }
 
     void install(String pythonVersion, String requirements="requirements"){

@@ -1,11 +1,11 @@
 package tool.packing
 
-import utils.PipelineHandler
+import handler.PipelineHandler
 
 class Tar extends PipelineHandler {
 
-    Tar(Object steps) {
-        super(steps)
+    Tar(Object pipelineContext) {
+        super(pipelineContext)
     }
 
     void packing(String appName, String buildNumber){

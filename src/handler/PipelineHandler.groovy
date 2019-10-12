@@ -1,26 +1,26 @@
-package utils
+package handler
 
 class PipelineHandler implements Serializable {
-    def steps
+    def pipelineContext
 
-    PipelineHandler(steps) {
-        this.steps = steps
+    PipelineHandler(pipelineContext) {
+        this.pipelineContext = pipelineContext
     }
 
     void exec(String command) {
-        steps.sh command
+        pipelineContext.sh command
     }
 
     void execOut(String command) {
-        String out = steps.sh(
+        String out = pipelineContext.sh(
                 script: "${command}",
                 returnStdout: true
         ).trim()
-        steps.echo out
+        pipelineContext.echo out
     }
 
     String execWithReturn(String command) {
-        return steps.sh(
+        return pipelineContext.sh(
                 script: "${command}",
                 returnStdout: true
         )

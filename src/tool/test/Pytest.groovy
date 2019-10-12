@@ -1,10 +1,10 @@
 package tool.test
 
-import utils.PipelineHandler
+import handler.PipelineHandler
 
 class Pytest extends PipelineHandler{
-    Pytest(Object steps) {
-        super(steps)
+    Pytest(Object pipelineContext) {
+        super(pipelineContext)
     }
     void runTest(String testPath){
         super.exec("pytest ${params.TEST_PATH}")

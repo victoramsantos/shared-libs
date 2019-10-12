@@ -2,6 +2,7 @@ import build.Pip
 import tool.packing.Tar
 import tool.sourcecontrolmanagement.Git
 import tool.test.Pytest
+import utils.Log
 
 def call(body) {
     def params = [:]
@@ -13,6 +14,7 @@ def call(body) {
     Pytest pytest = new Pytest(this)
     Git git = new Git(this)
     Tar tar = new Tar(this)
+    Log log = new Log(this)
 
     String masterPath
 
@@ -31,7 +33,7 @@ def call(body) {
                                 params.BRANCH
                         )
 
-                        echo "Using masterPath as ${this.masterPath}"
+                        log.info("Using masterPath as ${this.masterPath}")
                     }
                 }
             }
