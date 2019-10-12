@@ -37,7 +37,7 @@ def call(body) {
                     }
                 }
             }
-            stage("Bulding") {
+            stage("Building") {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
