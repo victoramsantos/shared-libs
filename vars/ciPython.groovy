@@ -45,8 +45,9 @@ def call(body) {
                     }
                 }
                 steps {
-                    dir("${masterPath}") {
+                    dir("${this.masterPath}") {
                         script {
+                            sh "pwd"
                             sh "ls -lha"
                             pip.install(
                                     params.PYTHON_VERSION,
