@@ -41,11 +41,11 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${this.masterPath}:${this.masterPath}"
+                        args "-v ${masterPath}:${masterPath}"
                     }
                 }
                 steps {
-                    dir(this.masterPath) {
+                    dir(masterPath) {
                         script {
                             sh "ls -lha"
                             pip.install(
