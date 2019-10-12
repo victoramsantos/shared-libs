@@ -20,7 +20,7 @@ def call(body) {
                 steps {
                     script {
                         this.println("antes")
-                        git.cloneAndCheckout(REPO: params.REPO, REPO_NAME: params.REPO, BRANCH: params.BRANCH)
+                        git.cloneAndCheckout(params.REPO,params.REPO,params.BRANCH)
                         this.println("depois")
 
                     }
