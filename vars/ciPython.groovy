@@ -45,14 +45,12 @@ def call(body) {
                     }
                 }
                 steps {
-                    dir("${params.REPO}") {
+                    dir(this.masterPath) {
                         script {
-                            dir(this.masterPath) {
-                                pip.install(
-                                        params.PYTHON_VERSION,
-                                        params.REQUIREMENTS
-                                )
-                            }
+                            pip.install(
+                                    params.PYTHON_VERSION,
+                                    params.REQUIREMENTS
+                            )
                         }
                     }
                 }
