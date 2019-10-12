@@ -2,6 +2,7 @@ package utils
 
 class ShellCommand implements Serializable {
     def steps
+
     ShellCommand(steps) {
         this.steps = steps
     }
@@ -27,5 +28,9 @@ class ShellCommand implements Serializable {
                     returnStdout: true
             )
         }
+    }
+
+    void print(String str){
+        steps.echo str
     }
 }
