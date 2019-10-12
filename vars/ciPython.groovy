@@ -26,9 +26,9 @@ def call(body) {
                 steps {
                     script {
                         this.masterPath = git.cloneAndCheckout {
-                            repository: params.REPO
-                            appName: params.APPNAME
-                            branch: params.BRANCH
+                            repository params.REPO
+                            appName params.APPNAME
+                            branch params.BRANCH
                         }
                     }
                 }
