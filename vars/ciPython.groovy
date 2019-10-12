@@ -30,6 +30,8 @@ def call(body) {
                                 params.APPNAME,
                                 params.BRANCH
                         )
+
+                        echo "Using masterPath as ${this.masterPath}"
                     }
                 }
             }
