@@ -10,6 +10,6 @@ class Git extends PipelineHandler{
 
     String cloneAndCheckout(String repository, String appName, String branch="master") {
         super.exec("git clone -b ${branch} ${repository} && cd ${appName} && git checkout ${branch}")
-        return super.execWithReturn("cd ${appName} && pwd")
+        return super.execWithReturn("cd ${appName} && pwd").trim()
     }
 }
