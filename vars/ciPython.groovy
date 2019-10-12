@@ -3,7 +3,6 @@ import tool.sourcecontrolmanagement.Git
 import tool.test.Pytest
 
 def call(body) {
-    println("body is ${body.getClass()}")
     def params = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = params
