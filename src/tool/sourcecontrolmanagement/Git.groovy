@@ -1,8 +1,8 @@
 package tool.sourcecontrolmanagement
 
-import utils.ShellCommand
+import utils.PipelineHandler
 
-class Git extends ShellCommand{
+class Git extends PipelineHandler{
 
     Git(steps) {
         super(steps)

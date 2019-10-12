@@ -1,8 +1,8 @@
 package tool.test
 
-import utils.ShellCommand
+import utils.PipelineHandler
 
-class Pytest extends ShellCommand{
+class Pytest extends PipelineHandler{
     Pytest(Object steps) {
         super(steps)
     }

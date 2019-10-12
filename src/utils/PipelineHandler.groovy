@@ -1,9 +1,9 @@
 package utils
 
-class ShellCommand implements Serializable {
+class PipelineHandler implements Serializable {
     def steps
 
-    ShellCommand(steps) {
+    PipelineHandler(steps) {
         this.steps = steps
     }
 

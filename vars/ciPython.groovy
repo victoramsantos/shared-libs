@@ -1,4 +1,5 @@
 import build.Pip
+import tool.packing.Tar
 import tool.sourcecontrolmanagement.Git
 import tool.test.Pytest
 
@@ -11,6 +12,9 @@ def call(body) {
     Pip pip = new Pip(this)
     Pytest pytest = new Pytest(this)
     Git git = new Git(this)
+    Tar tar = new Tar(this)
+
+    String masterPath
 
     pipeline {
         agent any
@@ -21,13 +25,11 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
-                        String ret = git.cloneAndCheckout(
+                        this.masterPath = git.cloneAndCheckout(
                                 params.REPO,
                                 params.APPNAME,
                                 params.BRANCH
                         )
-
-                        this.println("Ret foi ${ret}")
                     }
                 }
             }
@@ -63,9 +65,11 @@ def call(body) {
                 }
             }
             stage("Packing") {
-                agent any
                 steps {
-                    sh "tar -zcvf ${params.APPNAME}-${env.BUILD_NUMBER}.gz ${params.APPNAME}/"
+                    tar.packing(
+                            params.APPNAME,
+                            env.BUILD_NUMBER
+                    )
                 }
             }
         }

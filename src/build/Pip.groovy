@@ -1,8 +1,8 @@
 package build
 
-import utils.ShellCommand
+import utils.PipelineHandler
 
-class Pip extends ShellCommand{
+class Pip extends PipelineHandler{
     Pip(Object steps) {
         super(steps)
     }
