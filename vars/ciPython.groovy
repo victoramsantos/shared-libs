@@ -83,6 +83,7 @@ def call(body) {
                                 params.APPNAME,
                                 env.BUILD_NUMBER
                         )
+                        log.info("App packed in ${sh "pwd"}")
                     }
                 }
             }
