@@ -1,8 +1,12 @@
+import build.Pip
+
 def call(body) {
     def params = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = params
     body()
+
+    Pip pip = new Pip()
 
     pipeline {
         agent any
@@ -24,7 +28,7 @@ def call(body) {
                 }
                 steps {
                     dir("${repo_name}") {
-                        sh "pip${params.PYTHON_VERSION} install -r requirements -t ."
+                        pip.install(params.PYTHON_VERSION, params.REQUIREMENTS)
                     }
                 }
             }
