@@ -28,7 +28,9 @@ def call(body) {
                 }
                 steps {
                     dir("${repo_name}") {
-                        pip.install(params.PYTHON_VERSION, params.REQUIREMENTS)
+                        script{
+                            pip.install(params.PYTHON_VERSION, params.REQUIREMENTS)
+                        }
                     }
                 }
             }
