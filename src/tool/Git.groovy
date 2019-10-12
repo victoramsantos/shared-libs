@@ -1,8 +1,13 @@
 package tool
 
-import utils.Sh
+import utils.ShellCommand
 
-class Git extends Sh{
+class Git extends ShellCommand{
+
+    Git(Object steps) {
+        super(steps)
+    }
+
     String cloneAndCheckout(String REPO, String REPO_NAME, String BRANCH) {
 
             println("cloneAndChekcout aqui")

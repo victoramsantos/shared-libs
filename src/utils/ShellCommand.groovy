@@ -1,12 +1,17 @@
 package utils
 
-class Sh {
+class ShellCommand implements Serializable {
+    def steps
+    ShellCommand(steps) {
+        this.steps = steps
+    }
+
     void exec(String command) {
-        sh command
+        steps.sh command
     }
 
     void execOut(String command) {
-        script {
+        steps.script {
             String out = sh(
                     script: "${command}",
                     returnStdout: true
@@ -16,7 +21,7 @@ class Sh {
     }
 
     String execWithReturn(String command) {
-        script {
+        steps.script {
             return sh(
                     script: "${command}",
                     returnStdout: true

@@ -7,8 +7,8 @@ def call(body) {
     body.delegate = params
     body()
 
-    Pip pip = new Pip()
-    Git git = new Git()
+    Pip pip = new Pip(this)
+    Git git = new Git(this)
 
     pipeline {
         agent any
@@ -19,7 +19,7 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
-                        git.cloneAndCheckout(params.REPO, params.REPO, params.BRANCH)
+                        git.cloneAndCheckout params.REPO, params.REPO, params.BRANCH
                     }
                 }
             }
