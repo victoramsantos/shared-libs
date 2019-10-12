@@ -21,9 +21,9 @@ def call(body) {
                 steps {
                     script {
                         git.cloneAndCheckout(
-                                params.REPO as String,
-                                params.REPO as String,
-                                params.BRANCH as String
+                                params.REPO,
+                                params.APPNAME,
+                                params.BRANCH
                         )
                     }
                 }
@@ -37,7 +37,10 @@ def call(body) {
                 steps {
                     dir("${params.REPO}") {
                         script{
-                            pip.install(params.PYTHON_VERSION, params.REQUIREMENTS)
+                            pip.install(
+                                    params.PYTHON_VERSION,
+                                    params.REQUIREMENTS
+                            )
                         }
                     }
                 }

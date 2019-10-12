@@ -8,9 +8,8 @@ class Git extends ShellCommand{
         super(steps)
     }
 
-    String cloneAndCheckout(String REPO, String REPO_NAME, String BRANCH) {
-        super.print "cloneAndChekcout aqui"
-        super.exec("git clone -b ${BRANCH} ${REPO} && cd ${REPO_NAME} && git checkout ${BRANCH}")
-        return super.execWithReturn("cd ${REPO_NAME} && pwd")
+    String cloneAndCheckout(String repository, String appName, String branch="master") {
+        super.exec("git clone -b ${BRANCH} ${repository} && cd ${appName} && git checkout ${branch}")
+        return super.execWithReturn("cd ${appName} && pwd")
     }
 }
