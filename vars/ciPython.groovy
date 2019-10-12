@@ -19,7 +19,7 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
-                        git.cloneAndCheckout(${params.REPO}, ${params.REPO}, ${params.BRANCH})
+                        git.cloneAndCheckout(params.REPO, params.REPO, params.BRANCH)
                     }
                 }
             }
