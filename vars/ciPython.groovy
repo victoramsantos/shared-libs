@@ -41,7 +41,7 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE} -u root"
+                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
                     }
                 }
                 steps {
@@ -59,13 +59,17 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE} -u root"
+                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
                     }
                 }
                 steps {
                     script {
                         dir("${masterPath}") {
                             script {
+                                pip.installDependency(
+                                        params.PYTHON_VERSION,
+                                        "pytest"
+                                )
                                 pytest.runTest(params.TEST_PATH)
                             }
                         }
