@@ -7,6 +7,6 @@ class Pytest extends PipelineHandler{
         super(pipelineContext)
     }
     void runTest(String testPath){
-        super.exec("pytest ${testPath}")
+        super.exec("python -m pytest ${testPath}")
     }
 }
