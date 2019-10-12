@@ -1,5 +1,6 @@
 import build.Pip
-import tool.Git
+import tool.sourcecontrolmanagement.Git
+import tool.test.Pytest
 
 def call(body) {
     println("body is ${body.getClass()}")
@@ -9,6 +10,7 @@ def call(body) {
     body()
 
     Pip pip = new Pip(this)
+    Pytest pytest = new Pytest(this)
     Git git = new Git(this)
 
     pipeline {
@@ -20,11 +22,13 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
-                        git.cloneAndCheckout(
+                        String ret = git.cloneAndCheckout(
                                 params.REPO,
                                 params.APPNAME,
                                 params.BRANCH
                         )
+
+                        this.println("Ret foi ${ret}")
                     }
                 }
             }
@@ -52,8 +56,10 @@ def call(body) {
                     }
                 }
                 steps {
-                    dir("${params.APPNAME}") {
-                        sh "python${params.APPNAME} -m pytest ${params.TEST_PATH}"
+                    script {
+                        dir("${params.APPNAME}") {
+                            pytest(params.TEST_PATH)
+                        }
                     }
                 }
             }

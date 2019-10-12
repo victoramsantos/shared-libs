@@ -12,25 +12,17 @@ class ShellCommand implements Serializable {
     }
 
     void execOut(String command) {
-        steps.script {
-            String out = sh(
-                    script: "${command}",
-                    returnStdout: true
-            ).trim()
-            echo out
-        }
+        String out = steps.sh(
+                script: "${command}",
+                returnStdout: true
+        ).trim()
+        steps.echo out
     }
 
     String execWithReturn(String command) {
-        steps.script {
-            return sh(
-                    script: "${command}",
-                    returnStdout: true
-            )
-        }
-    }
-
-    void print(String str){
-        steps.echo str
+        return steps.sh(
+                script: "${command}",
+                returnStdout: true
+        )
     }
 }
