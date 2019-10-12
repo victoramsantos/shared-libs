@@ -1,7 +1,9 @@
 package build
 
-class Pip {
+import utils.Sh
+
+class Pip extends Sh{
     void install(String pythonVersion, String requirements="requirements"){
-        sh "pip${pythonVersion} install -r ${requirements} -t ."
+        super.execOut("pip${pythonVersion} install -r ${requirements} -t .")
     }
 }
