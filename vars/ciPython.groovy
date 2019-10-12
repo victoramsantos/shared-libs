@@ -58,7 +58,7 @@ def call(body) {
                 steps {
                     script {
                         dir("${params.APPNAME}") {
-                            pytest(params.TEST_PATH)
+                            pytest.runTest(params.TEST_PATH)
                         }
                     }
                 }
