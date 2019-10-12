@@ -3,6 +3,7 @@ import tool.packing.Tar
 import tool.sourcecontrolmanagement.Git
 import tool.test.Pytest
 import utils.Log
+import utils.Shell
 
 def call(body) {
     def params = [:]
@@ -15,6 +16,7 @@ def call(body) {
     Git git = new Git(this)
     Tar tar = new Tar(this)
     Log log = new Log(this)
+    Shell shell = new Shell(this)
 
     String masterPath
 
@@ -83,7 +85,7 @@ def call(body) {
                                 params.APPNAME,
                                 env.BUILD_NUMBER
                         )
-                        log.info("App packed in ${sh "pwd"}")
+                        log.info("App packed in ${shell.execWithReturn("pwd")}")
                     }
                 }
             }
