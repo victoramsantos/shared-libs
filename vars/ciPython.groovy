@@ -1,4 +1,5 @@
 import build.Pip
+import tool.Git
 
 def call(body) {
     def params = [:]
@@ -7,6 +8,7 @@ def call(body) {
     body()
 
     Pip pip = new Pip()
+    Git git = new Git()
 
     pipeline {
         agent any
@@ -16,8 +18,7 @@ def call(body) {
         stages {
             stage("Cloning") {
                 steps {
-                    sh "git clone ${params.REPO}"
-                    sh "git checkout ${params.BRANCH}"
+                    git.cloneAndCheckout(${params.REPO}, ${params.REPO}, ${params.BRANCH})
                 }
             }
             stage("Bulding") {
@@ -27,7 +28,7 @@ def call(body) {
                     }
                 }
                 steps {
-                    dir("${repo_name}") {
+                    dir("${params.REPO}") {
                         script{
                             pip.install(params.PYTHON_VERSION, params.REQUIREMENTS)
                         }
