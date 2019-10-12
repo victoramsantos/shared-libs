@@ -2,7 +2,7 @@ package utils
 
 class Sh {
     void exec(String command) {
-        sh "${command}"
+        sh command
     }
 
     void execOut(String command) {
