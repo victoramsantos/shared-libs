@@ -8,8 +8,8 @@ class Tar extends PipelineHandler {
         super(pipelineContext)
     }
 
-    void packing(String appName, String buildNumber){
+    String packing(String appName, String buildNumber){
         super.exec("tar -zcvf ${appName}-${buildNumber}.gz ${appName}/")
-        return ${appName}-${buildNumber}.gz
+        return "${appName}-${buildNumber}.gz"
     }
 }
