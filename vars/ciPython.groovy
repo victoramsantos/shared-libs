@@ -47,6 +47,7 @@ def call(body) {
                 steps {
                     dir(this.masterPath) {
                         script {
+                            sh "ls -lha"
                             pip.install(
                                     params.PYTHON_VERSION,
                                     params.REQUIREMENTS
