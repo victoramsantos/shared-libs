@@ -2,6 +2,7 @@ import build.Pip
 import tool.Git
 
 def call(body) {
+    println("body is ${body.getClass()}")
     def params = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = params
@@ -18,16 +19,13 @@ def call(body) {
         stages {
             stage("Cloning") {
                 steps {
-
-                        this.println("antes")
+                    script {
                         git.cloneAndCheckout(
-                                params.REPO,
-                                params.REPO,
-                                params.BRANCH
+                                params.REPO as String,
+                                params.REPO as String,
+                                params.BRANCH as String
                         )
-                        this.println("depois")
-
-
+                    }
                 }
             }
             stage("Bulding") {
