@@ -18,7 +18,7 @@ def call(body) {
         stages {
             stage("Cloning") {
                 steps {
-                    script {
+
                         this.println("antes")
                         git.cloneAndCheckout(
                                 params.REPO,
@@ -27,7 +27,7 @@ def call(body) {
                         )
                         this.println("depois")
 
-                    }
+
                 }
             }
             stage("Bulding") {
