@@ -41,7 +41,7 @@ def call(body) {
                 }
                 steps {
                     dir("${params.REPO}") {
-                        script{
+                        script {
                             pip.install(
                                     params.PYTHON_VERSION,
                                     params.REQUIREMENTS
@@ -66,10 +66,12 @@ def call(body) {
             }
             stage("Packing") {
                 steps {
-                    tar.packing(
-                            params.APPNAME,
-                            env.BUILD_NUMBER
-                    )
+                    script {
+                        tar.packing(
+                                params.APPNAME,
+                                env.BUILD_NUMBER
+                        )
+                    }
                 }
             }
         }
@@ -79,4 +81,5 @@ def call(body) {
             }
         }
     }
+
 }
