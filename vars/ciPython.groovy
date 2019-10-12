@@ -4,6 +4,7 @@ import tool.sourcecontrolmanagement.Git
 import tool.test.Pytest
 import utils.Log
 import utils.Shell
+import tool.aws.Aws
 
 def call(body) {
     def params = [:]
@@ -17,8 +18,10 @@ def call(body) {
     Tar tar = new Tar(this)
     Log log = new Log(this)
     Shell shell = new Shell(this)
+    Aws aws = new Aws(this)
 
     String masterPath
+    String packedName
 
     pipeline {
         agent any
@@ -81,11 +84,23 @@ def call(body) {
             stage("Packing") {
                 steps {
                     script {
-                        tar.packing(
+                        packedName = tar.packing(
                                 params.APPNAME,
                                 env.BUILD_NUMBER
                         )
                         log.info("App packed in ${shell.execWithReturn("pwd")}")
+                    }
+                }
+            }
+            stage("Uploading to S3") {
+                steps {
+                    script {
+                        aws.uploadToS3(
+                            packedName,
+                            packedName,
+                            params.APPNAME
+                        )
+                        log.info("Packing sent to S3")
                     }
                 }
             }
