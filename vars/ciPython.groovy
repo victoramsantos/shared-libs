@@ -41,7 +41,7 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${masterPath}:${masterPath}"
+                        args "-v ${this.masterPath}:${this.masterPath}"
                     }
                 }
                 steps {
@@ -60,7 +60,7 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${masterPath}:${masterPath} -w ${masterPath}"
+                        args "-v ${this.masterPath}:${this.masterPath}"
                     }
                 }
                 steps {
