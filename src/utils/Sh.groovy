@@ -1,13 +1,11 @@
 package utils
 
 class Sh {
-    void exec(String command){
-        script {
-            sh "${command}"
-        }
+    void exec(String command) {
+        sh "${command}"
     }
 
-    void execOut(String command){
+    void execOut(String command) {
         script {
             String out = sh(
                     script: "${command}",
@@ -17,7 +15,7 @@ class Sh {
         }
     }
 
-    String execWithReturn(String command){
+    String execWithReturn(String command) {
         script {
             return sh(
                     script: "${command}",
