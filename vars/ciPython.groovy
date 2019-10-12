@@ -41,14 +41,12 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
+                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE} -u root"
                     }
                 }
                 steps {
                     dir("${masterPath}") {
                         script {
-                            sh "pwd"
-                            sh "ls -lha"
                             pip.install(
                                     params.PYTHON_VERSION,
                                     params.REQUIREMENTS
@@ -61,13 +59,15 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${this.masterPath}:${this.masterPath}"
+                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE} -u root"
                     }
                 }
                 steps {
                     script {
-                        dir("${params.APPNAME}") {
-                            pytest.runTest(params.TEST_PATH)
+                        dir("${masterPath}") {
+                            script {
+                                pytest.runTest(params.TEST_PATH)
+                            }
                         }
                     }
                 }
