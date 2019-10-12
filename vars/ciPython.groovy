@@ -19,6 +19,7 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
+                        this.echo "to aqui"
                         git.cloneAndCheckout params.REPO, params.REPO, params.BRANCH
                     }
                 }
