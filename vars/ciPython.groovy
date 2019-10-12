@@ -25,11 +25,11 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
-                        this.masterPath = git.cloneAndCheckout {
-                            repository params.REPO
-                            appName params.APPNAME
-                            branch params.BRANCH
-                        }
+                        this.masterPath = git.cloneAndCheckout(
+                                params.REPO,
+                                params.APPNAME,
+                                params.BRANCH
+                        )
                     }
                 }
             }
@@ -37,6 +37,7 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
+                        args "-v ${masterPath}:${masterPath} -w ${masterPath}"
                     }
                 }
                 steps {
@@ -54,6 +55,7 @@ def call(body) {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
+                        args "-v ${masterPath}:${masterPath} -w ${masterPath}"
                     }
                 }
                 steps {
