@@ -25,11 +25,11 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
-                        this.masterPath = git.cloneAndCheckout(
-                                params.REPO,
-                                params.APPNAME,
-                                params.BRANCH
-                        )
+                        this.masterPath = git.cloneAndCheckout {
+                            repository: params.REPO
+                            appName: params.APPNAME
+                            branch: params.BRANCH
+                        }
                     }
                 }
             }
