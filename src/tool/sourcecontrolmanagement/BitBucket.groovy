@@ -2,9 +2,9 @@ package tool.sourcecontrolmanagement
 
 import handler.PipelineHandler
 
-class Git extends PipelineHandler implements SCM{
+class BitBucket extends PipelineHandler implements SCM{
 
-    Git(pipelineContext) {
+    BitBucket(pipelineContext) {
         super(pipelineContext)
     }
 

@@ -1,10 +1,13 @@
 import build.Pip
+import test.Pytest
+import tool.cloudprovider.Aws
+import tool.cloudprovider.CloudProvider
+import tool.packing.Packing
 import tool.packing.Tar
 import tool.sourcecontrolmanagement.Git
-import tool.test.Pytest
+import tool.sourcecontrolmanagement.SCM
 import utils.Log
 import utils.Shell
-import tool.aws.Aws
 
 def call(body) {
     def params = [:]
@@ -14,11 +17,11 @@ def call(body) {
 
     Pip pip = new Pip(this)
     Pytest pytest = new Pytest(this)
-    Git git = new Git(this)
-    Tar tar = new Tar(this)
+    SCM scm = new Git(this)
+    Packing packing = new Tar(this)
     Log log = new Log(this)
     Shell shell = new Shell(this)
-    Aws aws = new Aws(this)
+    CloudProvider cloud = new Aws(this)
 
     String masterPath
     String packedName
@@ -32,7 +35,7 @@ def call(body) {
             stage("Cloning") {
                 steps {
                     script {
-                        masterPath = git.cloneAndCheckout(
+                        masterPath = scm.cloneAndCheckout(
                                 params.REPO,
                                 params.APPNAME,
                                 params.BRANCH
@@ -84,7 +87,7 @@ def call(body) {
             stage("Packing") {
                 steps {
                     script {
-                        packedName = tar.packing(
+                        packedName = packing.packing(
                                 params.APPNAME,
                                 env.BUILD_NUMBER
                         )
@@ -92,15 +95,15 @@ def call(body) {
                     }
                 }
             }
-            stage("Uploading to S3") {
+            stage("Uploading to cloud") {
                 steps {
                     script {
-                        aws.uploadToS3(
+                        cloud.upload(
                             packedName,
                             packedName,
                             params.APPNAME
                         )
-                        log.info("Packing sent to S3")
+                        log.info("Packing sent to cloud")
                     }
                 }
             }
