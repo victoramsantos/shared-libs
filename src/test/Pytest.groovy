@@ -1,4 +1,4 @@
-package tool.test
+package test
 
 import handler.PipelineHandler
 
