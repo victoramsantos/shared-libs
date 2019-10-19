@@ -31,34 +31,33 @@ def call(body) {
                 }
             }
             stage("Deploying app") {
-                steps {
-                    stages {
-                        stage("Creating LC and ASG") {
-                            steps {
-                                script {
-                                    log.info("Creating LC and ASG")
-                                }
+                stages {
+                    stage("Creating LC and ASG") {
+                        steps {
+                            script {
+                                log.info("Creating LC and ASG")
                             }
                         }
-                        stage("Deploying app") {
-                            steps{
-                                script {
-                                    log.info("Deploying app")
-                                    log.info("Testing health check")
-                                    log.info("Creating TG")
-                                    log.info("Creating ALBs if not already exist")
-                                    log.info("Creating Green ALB")
-                                    log.info("Changing flow to 90/10")
-                                    log.info("Changing flow to 70/30")
-                                    log.info("Changing flow to 50/50")
-                                    log.info("Changing flow to 0/100")
-                                    log.info("Promoting Green ALB to Blue")
-                                    log.info("Deleting old blue environment")
-                                }
+                    }
+                    stage("Deploying app") {
+                        steps {
+                            script {
+                                log.info("Deploying app")
+                                log.info("Testing health check")
+                                log.info("Creating TG")
+                                log.info("Creating ALBs if not already exist")
+                                log.info("Creating Green ALB")
+                                log.info("Changing flow to 90/10")
+                                log.info("Changing flow to 70/30")
+                                log.info("Changing flow to 50/50")
+                                log.info("Changing flow to 0/100")
+                                log.info("Promoting Green ALB to Blue")
+                                log.info("Deleting old blue environment")
                             }
                         }
                     }
                 }
+
             }
 
         }
