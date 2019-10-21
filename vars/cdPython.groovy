@@ -1,6 +1,4 @@
 import clouddeploy.Terraform
-import tool.sourcecontrolmanagement.Git
-import tool.sourcecontrolmanagement.SCM
 import utils.Log
 
 def call(body) {
@@ -9,10 +7,9 @@ def call(body) {
     body.delegate = params
     body()
 
-    SCM scm = new Git(this)
     Log log = new Log(this)
     Terraform terraform = new Terraform(this)
-    String masterPath
+    String terraformPath
 
 
     pipeline {
@@ -21,11 +18,13 @@ def call(body) {
             skipStagesAfterUnstable()
         }
         stages {
-            stage("Retrieving package") {
+            stage("Retrieving util libs") {
                 steps {
                     script {
                         script {
-                            log.info("Using masterPath as")
+                            log.info("Retrieving terraform repository")
+                            terraformPath = terraform.loads()
+                            log.info("Using terraform from ${terraformPath}")
                         }
                     }
                 }
@@ -36,12 +35,14 @@ def call(body) {
                         steps {
                             script {
                                 log.info("Creating LC and ASG")
+                                terraform.createASGStack()
                             }
                         }
                     }
                     stage("Deploying app") {
                         steps {
                             script {
+                                log.info("Retrieving package")
                                 log.info("Deploying app")
                                 log.info("Testing health check")
                                 log.info("Creating TG")
