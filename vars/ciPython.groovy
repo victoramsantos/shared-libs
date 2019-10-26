@@ -46,39 +46,31 @@ def call(body) {
                 }
             }
             stage("Building") {
-                agent {
-                    docker {
-                        image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
-                    }
-                }
                 steps {
-                    dir("${masterPath}") {
-                        script {
-                            pip.install(
-                                    params.PYTHON_VERSION,
-                                    params.REQUIREMENTS
-                            )
+                    docker.image("python:${params.PYTHON_VERSION}-alpine").withRun("-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}") { container ->
+                        dir("${masterPath}") {
+                            script {
+                                pip.install(
+                                        params.PYTHON_VERSION,
+                                        params.REQUIREMENTS
+                                )
+                            }
                         }
                     }
                 }
             }
             stage("Testing") {
-                agent {
-                    docker {
-                        image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
-                    }
-                }
                 steps {
-                    script {
-                        dir("${masterPath}") {
-                            script {
-                                pip.installDependency(
-                                        params.PYTHON_VERSION,
-                                        "pytest"
-                                )
-                                pytest.runTest(params.TEST_PATH)
+                    docker.image("python:${params.PYTHON_VERSION}-alpine").withRun("-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}") { container ->
+                        script {
+                            dir("${masterPath}") {
+                                script {
+                                    pip.installDependency(
+                                            params.PYTHON_VERSION,
+                                            "pytest"
+                                    )
+                                    pytest.runTest(params.TEST_PATH)
+                                }
                             }
                         }
                     }
