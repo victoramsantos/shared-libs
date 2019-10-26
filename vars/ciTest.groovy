@@ -1,4 +1,8 @@
-def call(LinkedHashMap<String, String> params) {
+def call(body) {
+    def params = [:]
+    body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = params
+    body()
 
     params.each{entry -> println "$entry.key: $entry.value"}
 
