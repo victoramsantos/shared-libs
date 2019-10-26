@@ -1,4 +1,4 @@
-def call(Map params) {
+def call(LinkedHashMap<String, String> params) {
 
     params.each{entry -> println "$entry.key: $entry.value"}
 
