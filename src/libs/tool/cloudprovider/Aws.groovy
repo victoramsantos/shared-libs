@@ -1,6 +1,6 @@
-package tool.cloudprovider
+package libs.tool.cloudprovider
 
-import handler.PipelineHandler
+import libs.handler.PipelineHandler
 
 class Aws extends PipelineHandler implements CloudProvider{
     private String bucket = "victoramsantos-ci-cd"

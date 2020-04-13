@@ -1,13 +1,13 @@
-import build.Pip
-import test.Pytest
-import tool.cloudprovider.Aws
-import tool.cloudprovider.CloudProvider
-import tool.packing.Packing
-import tool.packing.Tar
-import tool.sourcecontrolmanagement.Git
-import tool.sourcecontrolmanagement.SCM
-import utils.Log
-import utils.Shell
+import libs.build.Pip
+import libs.testtool.Pytest
+import libs.tool.cloudprovider.Aws
+import libs.tool.cloudprovider.CloudProvider
+import libs.tool.packing.Packing
+import libs.tool.packing.Tar
+import libs.tool.sourcecontrolmanagement.Git
+import libs.tool.sourcecontrolmanagement.SCM
+import libs.utils.Log
+import libs.utils.Shell
 
 def call(body) {
     def params = [:]
@@ -42,6 +42,13 @@ def call(body) {
                         )
 
                         log.info("Using masterPath as ${masterPath}")
+                    }
+                }
+            }
+            stage("print") {
+                steps {
+                    script {
+                        error "stopping"
                     }
                 }
             }

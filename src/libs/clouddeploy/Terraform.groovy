@@ -1,8 +1,8 @@
-package clouddeploy
+package libs.clouddeploy
 
-import handler.PipelineHandler
-import tool.sourcecontrolmanagement.Git
-import tool.sourcecontrolmanagement.SCM
+import libs.handler.PipelineHandler
+import libs.tool.sourcecontrolmanagement.Git
+import libs.tool.sourcecontrolmanagement.SCM
 
 class Terraform extends PipelineHandler {
     private String repository

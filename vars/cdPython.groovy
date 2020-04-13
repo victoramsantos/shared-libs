@@ -1,5 +1,5 @@
-import clouddeploy.Terraform
-import utils.Log
+import libs.clouddeploy.Terraform
+import libs.utils.Log
 
 def call(body) {
     def params = [:]

@@ -1,4 +1,4 @@
-package tool.cloudprovider
+package libs.tool.cloudprovider
 
 interface CloudProvider {
     void upload(String filePath, String destinationFileName, String appName)

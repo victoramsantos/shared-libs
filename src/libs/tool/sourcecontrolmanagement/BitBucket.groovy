@@ -1,6 +1,6 @@
-package tool.sourcecontrolmanagement
+package libs.tool.sourcecontrolmanagement
 
-import handler.PipelineHandler
+import libs.handler.PipelineHandler
 
 class BitBucket extends PipelineHandler implements SCM{
 
