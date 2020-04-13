@@ -45,14 +45,7 @@ def call(body) {
                     }
                 }
             }
-            stage("print") {
-                steps {
-                    script {
-                        error "stopping"
-                    }
-                }
-            }
-            stage("Building") {
+            stage("Building and Testing") {
                 agent {
                     docker {
                         image "python:${params.PYTHON_VERSION}-alpine"
@@ -66,51 +59,15 @@ def call(body) {
                                     params.PYTHON_VERSION,
                                     params.REQUIREMENTS
                             )
+                            pytest.runTest(params.TEST_PATH)
                         }
                     }
                 }
             }
-            stage("Testing") {
-                agent {
-                    docker {
-                        image "python:${params.PYTHON_VERSION}-alpine"
-                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
-                    }
-                }
+            stage("Building Image") {
                 steps {
                     script {
-                        dir("${masterPath}") {
-                            script {
-                                pip.installDependency(
-                                        params.PYTHON_VERSION,
-                                        "pytest"
-                                )
-                                pytest.runTest(params.TEST_PATH)
-                            }
-                        }
-                    }
-                }
-            }
-            stage("Packing") {
-                steps {
-                    script {
-                        packedName = packing.packing(
-                                params.APPNAME,
-                                env.BUILD_NUMBER
-                        )
-                        log.info("App packed in ${shell.execWithReturn("pwd")}")
-                    }
-                }
-            }
-            stage("Uploading to cloud") {
-                steps {
-                    script {
-                        cloud.upload(
-                            packedName,
-                            packedName,
-                            params.APPNAME
-                        )
-                        log.info("Packing sent to cloud")
+                        log.info("Should build container image")
                     }
                 }
             }
