@@ -2,7 +2,7 @@ package libs.utils
 
 class ApplicationProperties {
     private Map properties = [:]
-    ApplicationProperties(Map params){
+    ApplicationProperties(def params){
         this.properties += params
     }
 
