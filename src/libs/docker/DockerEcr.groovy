@@ -11,8 +11,8 @@ class DockerEcr implements Docker {
 
     @Override
     void createRepository(String repository, String applicationName, String region) {
-        shell("aws ecr describe-repositories --repository-names $repository/$applicationName --region $region" +
-                " || aws ecr create-repository --repository-name $repository/$applicationName --region $region")
+        shell("aws ecr describe-repositories --repository-names $applicationName --region $region" +
+                " || aws ecr create-repository --repository-name $applicationName --region $region")
     }
 
     @Override
