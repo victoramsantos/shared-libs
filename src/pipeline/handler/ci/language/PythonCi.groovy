@@ -6,13 +6,15 @@ import pipeline.handler.ci.GenericCi
 
 class PythonCi extends GenericCi {
 
+    protected ApplicationProperties applicationProperties
+
     PythonCi(ApplicationProperties applicationProperties) {
         super(applicationProperties)
     }
 
     @Override
     String getBuildImage() {
-        String runtimeVersion = super.applicationProperties.getString("RUNTIME_VERSION")
+        String runtimeVersion = applicationProperties.getString("RUNTIME_VERSION")
         return "python:$runtimeVersion-alpine"
     }
 
