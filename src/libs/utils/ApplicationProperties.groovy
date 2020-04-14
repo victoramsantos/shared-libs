@@ -7,6 +7,6 @@ class ApplicationProperties {
     }
 
     String getString(String key) {
-        return this.properties[key]
+        return this.properties.get(key)
     }
 }
