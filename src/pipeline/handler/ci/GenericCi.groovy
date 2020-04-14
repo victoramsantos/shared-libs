@@ -33,7 +33,7 @@ abstract class GenericCi implements PipelineHandlerCi {
 
     @Override
     void buildDockerImage() {
-        String repository = "97823652972.dkr.ecr.us-east-1.amazonaws.com"
+        String repository = "397823652972.dkr.ecr.us-east-1.amazonaws.com"
         String applicationName = this.applicationProperties.getString("APPLICATION_NAME")
         String tag = "1.0"
         String region = "us-east-1"
