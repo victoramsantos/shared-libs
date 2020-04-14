@@ -12,7 +12,7 @@ class PythonCi extends GenericCi {
 
     @Override
     String getBuildImage() {
-        String runtimeVersion = this.applicationProperties.getString("RUNTIME_VERSION")
+        String runtimeVersion = applicationProperties.getString("RUNTIME_VERSION")
         return "python:$runtimeVersion-alpine"
     }
 
