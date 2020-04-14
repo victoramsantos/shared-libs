@@ -27,21 +27,21 @@ def call(body) {
                     }
                 }
             }
-        }
-        stage("Building and testing") {
-            agent {
-                docker {
-                    image "${pipelineHandler.getBuildImage(applicationProperties.getString("RUNTIME_VERSION"))}"
-                    args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
+            stage("Building and testing") {
+                agent {
+                    docker {
+                        image "${pipelineHandler.getBuildImage(applicationProperties.getString("RUNTIME_VERSION"))}"
+                        args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
+                    }
                 }
-            }
-            steps {
-                dir("${masterPath}") {
-                    script {
-                        pipelineHandler.buildAndTest(
-                                applicationProperties.getString("RUNTIME_VERSION"),
-                                applicationProperties.getString("REQUIREMENTS_PATH")
-                        )
+                steps {
+                    dir("${masterPath}") {
+                        script {
+                            pipelineHandler.buildAndTest(
+                                    applicationProperties.getString("RUNTIME_VERSION"),
+                                    applicationProperties.getString("REQUIREMENTS_PATH")
+                            )
+                        }
                     }
                 }
             }
