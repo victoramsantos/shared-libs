@@ -4,10 +4,10 @@ class ApplicationProperties {
     private Map properties
     ApplicationProperties(Map params){
         this.properties = new HashMap(params)
-        printMap(this.properties)
     }
 
     String getString(String key)  {
+        printMap(this.properties)
         return this.properties.get(key) as String
     }
 
