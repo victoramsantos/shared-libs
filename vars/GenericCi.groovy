@@ -10,15 +10,12 @@ def call(body) {
     body()
 
     PipelineContext.init(this)
-    print(params.PIPELINE_CI)
     ApplicationProperties applicationProperties = new ApplicationProperties(params)
-    print(applicationProperties.getString("PIPELINE_CI"))
-    print(applicationProperties.getString("REPOSITORY"))
     PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(applicationProperties)
 
     pipeline {
         stages {
-            stage("Cloning") {
+            stage("Cloning Project") {
                 steps {
                     script {
                         pipelineHandler.scmClone(
