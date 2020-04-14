@@ -38,8 +38,9 @@ abstract class GenericCi implements PipelineHandlerCi {
         String tag = "1.0"
         String region = "us-east-1"
 
-        Docker docker = new DockerEcr(region)
+        Docker docker = new DockerEcr()
 
+        docker.login(region)
         docker.createRepository(repository, applicationName)
         docker.build(repository, applicationName, tag)
         docker.push(repository, applicationName, tag)

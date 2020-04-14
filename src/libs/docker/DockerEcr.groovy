@@ -4,7 +4,8 @@ import static pipeline.context.PipelineContext.shell
 
 class DockerEcr implements Docker {
 
-    DockerEcr(String region){
+    @Override
+    void login(String region){
         shell("\$(aws ecr get-login --region $region --no-include-email)")
     }
 
