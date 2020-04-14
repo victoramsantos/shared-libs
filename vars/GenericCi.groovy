@@ -14,6 +14,7 @@ def call(body) {
     PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(applicationProperties)
 
     pipeline {
+        agent any
         stages {
             stage("Cloning Project") {
                 steps {
