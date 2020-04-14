@@ -1,5 +1,5 @@
 import libs.build.Pip
-import libs.testtool.Pytest
+import libs.testtool.PyTest
 import libs.tool.cloudprovider.Aws
 import libs.tool.cloudprovider.CloudProvider
 import libs.tool.packing.Packing
@@ -15,7 +15,7 @@ def call(body) {
     body()
 
     Pip pip = new Pip(this)
-    Pytest pytest = new Pytest(this)
+    PyTest pytest = new PyTest(this)
     SCM scm = new Git(this)
     Packing packing = new Tar(this)
     Log log = new Log(this)

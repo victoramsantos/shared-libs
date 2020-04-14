@@ -1,6 +1,7 @@
 package pipeline.handler.ci.language
 
 import libs.build.Pip
+import libs.testtool.PyTest
 import libs.utils.ApplicationProperties
 import pipeline.handler.ci.GenericCi
 
@@ -18,15 +19,14 @@ class PythonCi extends GenericCi {
 
     @Override
     void buildAndTest() {
+        String requirementsPath = applicationProperties.getString("REQUIREMENTS_PATH")
+        String testPath = applicationProperties.getString("TEST_PATH")
+
         Pip pip = new Pip()
-        String runtimeVersion = this.applicationProperties.getString("RUNTIME_VERSION")
-        String requirementsPath = this.applicationProperties.getString("REQUIREMENTS_PATH")
+        pip.install(requirementsPath)
+        pip.installDependency("pytest")
 
-
-        pip.install(
-                runtimeVersion,
-                requirementsPath
-        )
-//        pytest.runTest(params.TEST_PATH)
+        PyTest pyTest = new PyTest()
+        pyTest.runTest(testPath)
     }
 }
