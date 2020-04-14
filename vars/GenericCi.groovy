@@ -10,6 +10,7 @@ def call(body) {
     body()
 
     PipelineContext.init(this)
+    print(params.PIPELINE_CI)
     ApplicationProperties properties = new ApplicationProperties(params)
     PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(properties)
 
