@@ -7,10 +7,10 @@ import libs.utils.Log
 
 abstract class GenericCi implements PipelineHandlerCi {
 
-    private ApplicationProperties properties
+    protected ApplicationProperties applicationProperties
 
-    GenericCi(ApplicationProperties properties){
-        this.properties = properties
+    GenericCi(ApplicationProperties applicationProperties){
+        this.applicationProperties = applicationProperties
     }
 
     @Override
@@ -22,11 +22,6 @@ abstract class GenericCi implements PipelineHandlerCi {
                 branch
         )
         Log.info("Using masterPath as $masterPath")
-    }
-
-    @Override
-    void buildAndTest() {
-
     }
 
     @Override

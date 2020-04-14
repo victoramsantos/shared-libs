@@ -16,13 +16,31 @@ def call(body) {
     pipeline {
         agent any
         stages {
-            stage("Cloning Project") {
+            stage("Cloning project") {
                 steps {
                     script {
                         pipelineHandler.scmClone(
                                 applicationProperties.getString("REPOSITORY"),
                                 applicationProperties.getString("APPLICATION_NAME"),
                                 applicationProperties.getString("BRANCH")
+                        )
+                    }
+                }
+            }
+        }
+        stage("Building and testing") {
+            agent {
+                docker {
+                    image "${pipelineHandler.getBuildImage(applicationProperties.getString("RUNTIME_VERSION"))}"
+                    args "-v ${WORKSPACE}:${WORKSPACE} -w ${WORKSPACE}"
+                }
+            }
+            steps {
+                dir("${masterPath}") {
+                    script {
+                        pipelineHandler.buildAndTest(
+                                applicationProperties.getString("RUNTIME_VERSION"),
+                                applicationProperties.getString("REQUIREMENTS_PATH")
                         )
                     }
                 }
