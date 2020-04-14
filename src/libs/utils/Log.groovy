@@ -1,27 +1,22 @@
 package libs.utils
 
-import libs.handler.PipelineHandler
+import static pipeline.context.PipelineContext.echo
 
-class Log extends PipelineHandler{
-
-    Log(Object pipelineContext) {
-        super(pipelineContext)
+class Log{
+    static void info(String message){
+        logging("INFO", message)
     }
 
-    void info(String message){
-        this.logging("INFO", message)
+    static void warning(String message){
+        logging("WARNING", message)
     }
 
-    void warning(String message){
-        this.logging("WARNING", message)
+    static void error(String message){
+        logging("ERROR", message)
     }
 
-    void error(String message){
-        this.logging("ERROR", message)
-    }
-
-    private void logging(String severity, String message){
-        pipelineContext.echo "[${severity}] ${message}"
+    private static void logging(String severity, String message){
+        echo( "[$severity] $message")
     }
 
 }

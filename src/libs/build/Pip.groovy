@@ -1,17 +1,14 @@
 package libs.build
 
-import libs.handler.PipelineHandler
 
-class Pip extends PipelineHandler{
-    Pip(Object pipelineContext) {
-        super(pipelineContext)
-    }
+import static pipeline.context.PipelineContext.shell
 
-    void install(String pythonVersion, String requirements="requirements"){
-        super.execOut("pip${pythonVersion} install -r ${requirements} -t . --no-cache-dir")
+class Pip {
+    void install(String pythonVersion, String requirements){
+        shell("pip $pythonVersion install -r $requirements -t . --no-cache-dir")
     }
 
     void installDependency(String pythonVersion, String dependency){
-        super.execOut("pip${pythonVersion} install ${dependency} -t . --no-cache-dir")
+        shell("pip${pythonVersion} install ${dependency} -t . --no-cache-dir")
     }
 }

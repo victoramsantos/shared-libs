@@ -1,24 +1,35 @@
+import libs.utils.ApplicationProperties
+import pipeline.context.PipelineContext
+import pipeline.handler.ci.PipelineHandlerCi
+import pipeline.handler.ci.PipelineHandlerCiFactory
+
 def call(body) {
     def params = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = params
     body()
 
-    params.each{entry -> println "$entry.key: $entry.value"}
+    PipelineContext.init(this)
+    ApplicationProperties properties = new ApplicationProperties(params)
+    PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(properties)
 
     pipeline {
-        agent any
-        options {
-            skipStagesAfterUnstable()
-        }
         stages {
             stage("Cloning") {
                 steps {
                     script {
-                       echo params.get("VAL1")
-                       echo params.get("VAL2")
+                        pipelineHandler.scmClone(
+                                properties.getString("REPOSITORY"),
+                                properties.getString("APPLICATION_NAME"),
+                                properties.getString("BRANCH")
+                        )
                     }
                 }
+            }
+        }
+        post {
+            always {
+                cleanWs()
             }
         }
     }

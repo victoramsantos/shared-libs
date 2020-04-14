@@ -1,12 +1,10 @@
 package libs.testtool
 
-import libs.handler.PipelineHandler
+import static pipeline.context.PipelineContext.shell
 
-class Pytest extends PipelineHandler{
-    Pytest(Object pipelineContext) {
-        super(pipelineContext)
-    }
+class Pytest{
+
     void runTest(String testPath){
-        super.exec("python -m pytest ${testPath}")
+        shell("python -m pytest $testPath")
     }
 }

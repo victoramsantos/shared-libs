@@ -7,7 +7,6 @@ import libs.tool.packing.Tar
 import libs.tool.sourcecontrolmanagement.Git
 import libs.tool.sourcecontrolmanagement.SCM
 import libs.utils.Log
-import libs.utils.Shell
 
 def call(body) {
     def params = [:]
@@ -20,7 +19,6 @@ def call(body) {
     SCM scm = new Git(this)
     Packing packing = new Tar(this)
     Log log = new Log(this)
-    Shell shell = new Shell(this)
     CloudProvider cloud = new Aws(this)
 
     String masterPath
@@ -40,7 +38,6 @@ def call(body) {
                                 params.APPNAME,
                                 params.BRANCH
                         )
-
                         log.info("Using masterPath as ${masterPath}")
                     }
                 }
@@ -78,5 +75,4 @@ def call(body) {
             }
         }
     }
-
 }

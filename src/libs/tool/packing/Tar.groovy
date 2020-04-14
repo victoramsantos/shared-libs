@@ -1,16 +1,13 @@
 package libs.tool.packing
 
-import libs.handler.PipelineHandler
+import static pipeline.context.PipelineContext.shell
 
-class Tar extends PipelineHandler implements Packing{
 
-    Tar(Object pipelineContext) {
-        super(pipelineContext)
-    }
+class Tar implements Packing{
 
     @Override
     String packing(String appName, String buildNumber){
-        super.exec("tar -zcvf ${appName}-${buildNumber}.gz ${appName}/")
+        shell("tar -zcvf ${appName}-${buildNumber}.gz ${appName}/")
         return "${appName}-${buildNumber}.gz"
     }
 

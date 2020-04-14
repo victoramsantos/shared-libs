@@ -1,19 +1,16 @@
 package libs.clouddeploy
 
-import libs.handler.PipelineHandler
 import libs.tool.sourcecontrolmanagement.Git
 import libs.tool.sourcecontrolmanagement.SCM
 
-class Terraform extends PipelineHandler {
+class Terraform {
     private String repository
     private String appName
     private SCM scm
     private masterPath
 
-    Terraform(Object pipelineContext) {
-        super(pipelineContext)
-
-        scm = new Git(pipelineContext)
+    Terraform() {
+        scm = new Git()
         this.repository = "git@github.com:victoramsantos/terraform.git"
         this.appName = "terraform"
     }

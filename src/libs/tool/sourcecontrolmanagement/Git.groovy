@@ -1,16 +1,16 @@
 package libs.tool.sourcecontrolmanagement
 
-import libs.handler.PipelineHandler
 
-class Git extends PipelineHandler implements SCM{
+import static pipeline.context.PipelineContext.shell
+import static pipeline.context.PipelineContext.shellWithReturn
 
-    Git(pipelineContext) {
-        super(pipelineContext)
-    }
+class Git implements SCM{
 
     @Override
-    String cloneAndCheckout(String repository, String appName, String branch="master") {
-        super.exec("git clone -b ${branch} ${repository} && cd ${appName} && pwd && git checkout ${branch}")
-        return super.execWithReturn("cd ${appName} && pwd").trim()
+    String cloneAndCheckout(String repository, String applicationName, String branch) {
+        //TODO Improve this!
+        shell("git clone -b $branch $repository")
+        shell(applicationName, "git checkout $branch")
+        return shellWithReturn(applicationName, "pwd")
     }
 }
