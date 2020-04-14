@@ -5,7 +5,7 @@ import libs.utils.ApplicationProperties
 import pipeline.handler.ci.GenericCi
 
 class PythonCi extends GenericCi {
-    protected ApplicationProperties applicationProperties
+    private ApplicationProperties applicationProperties
 
     PythonCi(ApplicationProperties applicationProperties) {
         super(applicationProperties)
