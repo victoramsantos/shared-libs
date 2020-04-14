@@ -10,4 +10,8 @@ class ApplicationProperties {
     String getString(String key) {
         return this.applicationProperties.get(key)
     }
+
+    void add(String key, String value) {
+        this.applicationProperties[key] = value
+    }
 }

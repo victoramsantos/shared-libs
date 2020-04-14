@@ -14,7 +14,11 @@ abstract class GenericCi implements PipelineHandlerCi {
     }
 
     @Override
-    void scmClone(String repository, String applicationName, String branch) {
+    void scmClone() {
+        String repository = applicationProperties.getString("REPOSITORY")
+        String applicationName = applicationProperties.getString("APPLICATION_NAME")
+        String branch = applicationProperties.getString("BRANCH")
+
         SCM scm = new Git()
         String masterPath = scm.cloneAndCheckout(
                 repository,
@@ -22,6 +26,7 @@ abstract class GenericCi implements PipelineHandlerCi {
                 branch
         )
         Log.info("Using masterPath as $masterPath")
+        applicationProperties.add("APPLICATION_PATH", masterPath)
     }
 
     @Override

@@ -1,9 +1,9 @@
 package pipeline.handler.ci
 
 interface PipelineHandlerCi {
-    void scmClone(String repository, String applicationName, String branch)
-    String getBuildImage(String runtimeVersion)
-    void buildAndTest(String runtimeVersion, String requirementsPath)
+    void scmClone()
+    String getBuildImage()
+    void buildAndTest()
     void codeQualityAnalysis()
     void buildImage()
 }

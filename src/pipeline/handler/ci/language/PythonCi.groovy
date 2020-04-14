@@ -12,13 +12,18 @@ class PythonCi extends GenericCi {
     }
 
     @Override
-    String getBuildImage(String runtimeVersion) {
+    String getBuildImage() {
+        String runtimeVersion = applicationProperties.getString("RUNTIME_VERSION")
         return "python:$runtimeVersion-alpine"
     }
 
     @Override
-    void buildAndTest(String runtimeVersion, String requirementsPath) {
+    void buildAndTest() {
         Pip pip = new Pip()
+        String runtimeVersion = applicationProperties.getString("RUNTIME_VERSION")
+        String requirementsPath = applicationProperties.getString("REQUIREMENTS_PATH")
+
+
         pip.install(
                 runtimeVersion,
                 requirementsPath
