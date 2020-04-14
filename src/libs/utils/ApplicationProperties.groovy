@@ -1,9 +1,9 @@
 package libs.utils
 
 class ApplicationProperties {
-    private Map properties = [:]
-    ApplicationProperties(def params){
-        this.properties += params
+    private Map properties
+    ApplicationProperties(Map params){
+        this.properties = params.clone() as Map
     }
 
     String getString(String key)  {
