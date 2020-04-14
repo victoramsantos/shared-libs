@@ -3,7 +3,7 @@ package libs.utils
 class ApplicationProperties {
     private Map properties
     ApplicationProperties(Map params){
-        this.properties = params
+        this.properties = new HashMap(params)
     }
 
     String getString(String key)  {
