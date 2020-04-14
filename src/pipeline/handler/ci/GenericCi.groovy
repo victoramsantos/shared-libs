@@ -7,7 +7,7 @@ import libs.utils.Log
 
 abstract class GenericCi implements PipelineHandlerCi {
 
-    protected ApplicationProperties applicationProperties
+    private ApplicationProperties applicationProperties
 
     GenericCi(ApplicationProperties applicationProperties){
         this.applicationProperties = applicationProperties
