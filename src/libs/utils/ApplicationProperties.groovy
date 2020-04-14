@@ -8,14 +8,7 @@ class ApplicationProperties {
         print(this.properties.get("PIPELINE_CI"))
     }
 
-    String getString(String key)  {
-        printMap(this.properties)
+    String getString(String key) {
         return this.properties[key]
-    }
-
-    static void printMap(Map map){
-        for(Map.Entry entry: map.entrySet()){
-            print("${entry.key}--${entry.value}")
-        }
     }
 }
