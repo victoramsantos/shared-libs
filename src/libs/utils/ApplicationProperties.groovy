@@ -1,13 +1,13 @@
 package libs.utils
 
 class ApplicationProperties {
-    private Map properties
+    private Map applicationProperties
 
-    void init(Map properties){
-        this.properties = properties
+    ApplicationProperties(Map applicationProperties){
+        this.applicationProperties = applicationProperties
     }
 
     String getString(String key) {
-        return this.properties.get(key)
+        return this.applicationProperties.get(key)
     }
 }

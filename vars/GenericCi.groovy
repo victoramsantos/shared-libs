@@ -11,11 +11,10 @@ def call(body) {
 
     PipelineContext.init(this)
     print(params.PIPELINE_CI)
-    ApplicationProperties properties = new ApplicationProperties()
-    properties.init(params)
-    print(properties.getString("PIPELINE_CI"))
-    print(properties.getString("REPOSITORY"))
-    PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(properties)
+    ApplicationProperties applicationProperties = new ApplicationProperties(params)
+    print(applicationProperties.getString("PIPELINE_CI"))
+    print(applicationProperties.getString("REPOSITORY"))
+    PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(applicationProperties)
 
     pipeline {
         stages {
@@ -23,9 +22,9 @@ def call(body) {
                 steps {
                     script {
                         pipelineHandler.scmClone(
-                                properties.getString("REPOSITORY"),
-                                properties.getString("APPLICATION_NAME"),
-                                properties.getString("BRANCH")
+                                applicationProperties.getString("REPOSITORY"),
+                                applicationProperties.getString("APPLICATION_NAME"),
+                                applicationProperties.getString("BRANCH")
                         )
                     }
                 }
