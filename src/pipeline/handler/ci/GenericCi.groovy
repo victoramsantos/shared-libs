@@ -41,7 +41,7 @@ abstract class GenericCi implements PipelineHandlerCi {
         Docker docker = new DockerEcr()
 
         docker.login(region)
-        docker.createRepository(repository, applicationName)
+        docker.createRepository(repository, applicationName, region)
         docker.build(repository, applicationName, tag)
         docker.push(repository, applicationName, tag)
     }
