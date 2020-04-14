@@ -2,8 +2,9 @@ package libs.utils
 
 class ApplicationProperties {
     private Map properties
-    ApplicationProperties(Map params){
-        this.properties = params
+
+    void init(Map properties){
+        this.properties = properties
     }
 
     String getString(String key) {
