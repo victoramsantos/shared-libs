@@ -24,7 +24,6 @@ class PythonCi extends GenericCi {
 
         Pip pip = new Pip()
         pip.install(requirementsPath)
-       // pip.installDependency("pytest")
 
         PyTest pyTest = new PyTest()
         pyTest.runTest(testPath)

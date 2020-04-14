@@ -1,5 +1,7 @@
 package pipeline.handler.ci
 
+import libs.docker.Docker
+import libs.docker.DockerEcr
 import libs.tool.sourcecontrolmanagement.Git
 import libs.tool.sourcecontrolmanagement.SCM
 import libs.utils.ApplicationProperties
@@ -30,12 +32,16 @@ abstract class GenericCi implements PipelineHandlerCi {
     }
 
     @Override
-    void codeQualityAnalysis() {
+    void buildDockerImage() {
+        String repository = "97823652972.dkr.ecr.us-east-1.amazonaws.com"
+        String applicationName = this.applicationProperties.getString("APPLICATION_NAME")
+        String tag = "1.0"
+        String region = "us-east-1"
 
-    }
+        Docker docker = new DockerEcr()
 
-    @Override
-    void buildImage() {
-
+        docker.login(region)
+        docker.build(repository, applicationName, tag)
+        docker.push(repository, applicationName, tag)
     }
 }

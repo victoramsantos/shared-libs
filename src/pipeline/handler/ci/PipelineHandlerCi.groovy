@@ -4,6 +4,5 @@ interface PipelineHandlerCi {
     void scmClone()
     String getBuildImage()
     void buildAndTest()
-    void codeQualityAnalysis()
-    void buildImage()
+    void buildDockerImage()
 }

@@ -38,6 +38,15 @@ def call(body) {
                     }
                 }
             }
+            stage("Building image") {
+                steps {
+                    dir("${applicationProperties.getString("APPLICATION_PATH")}") {
+                        script{
+                            pipelineHandler.buildDockerImage()
+                        }
+                    }
+                }
+            }
         }
         post {
             always {

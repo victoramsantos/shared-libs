@@ -9,12 +9,12 @@ class DockerEcr implements Docker {
     }
 
     @Override
-    void tag() {
-
+    void build(String repository, String applicationName, String tag){
+        shell("docker build -t $repository/$applicationName:$tag . ")
     }
 
     @Override
-    void build(){
-
+    void push(String repository, String applicationName, String tag) {
+        shell("docker push $repository/$applicationName:$tag")
     }
 }
