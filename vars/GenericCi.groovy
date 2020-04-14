@@ -12,6 +12,8 @@ def call(body) {
     PipelineContext.init(this)
     print(params.PIPELINE_CI)
     ApplicationProperties properties = new ApplicationProperties(params)
+    print(properties.getString("PIPELINE_CI"))
+    print(properties.getString("REPOSITORY"))
     PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(properties)
 
     pipeline {
