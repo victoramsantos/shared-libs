@@ -3,12 +3,12 @@ package libs.utils
 class ApplicationProperties {
     private Map properties
     ApplicationProperties(Map params){
-        this.properties = params.clone() as Map
+        this.properties = params
     }
 
     String getString(String key)  {
         printMap(this.properties)
-        return this.properties.get(key) as String
+        return this.properties[key]
     }
 
     static void printMap(Map map){
