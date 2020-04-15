@@ -3,7 +3,7 @@ import libs.utils.Utils
 
 def call(Map jobParams) {
     Map defaultProperties = Utils.parsePropertyFile(this,"default.properties")
-    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties,jobParams)
+    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties)
 
     pipeline {
         agent any

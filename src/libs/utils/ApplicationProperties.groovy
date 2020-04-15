@@ -3,10 +3,6 @@ package libs.utils
 class ApplicationProperties {
     private Map applicationProperties = new HashMap()
 
-//    ApplicationProperties(Map defaultProperties, Map applicationProperties){
-//        this.applicationProperties = defaultProperties + applicationProperties
-//    }
-
     ApplicationProperties(Map... maps){
         maps.each { map ->
             this.applicationProperties += map
