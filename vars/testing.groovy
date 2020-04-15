@@ -22,6 +22,11 @@ def call(Map jobParams) {
             always {
                 cleanWs()
             }
+            success{
+                loadScript("vars/testingcd.groovy").call(applicationProperties)
+
+//                JobTrigger.trigger()
+            }
         }
     }
 }
