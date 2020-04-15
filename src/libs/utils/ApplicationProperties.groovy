@@ -1,9 +1,10 @@
 package libs.utils
 
 class ApplicationProperties {
-    private Map applicationProperties = new HashMap()
+    private Map applicationProperties
 
     ApplicationProperties(Map... maps){
+        this.applicationProperties = new HashMap()
         maps.each { map ->
             this.applicationProperties += map
         }
@@ -17,7 +18,7 @@ class ApplicationProperties {
         this.applicationProperties[key] = value
     }
 
-    Map testing(){
+    Map getApplicationProperties(){
         return this.applicationProperties
     }
 }
