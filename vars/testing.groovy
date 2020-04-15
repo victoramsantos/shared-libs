@@ -1,10 +1,7 @@
+import libs.utils.ApplicationProperties
+
 def call(Map jobParams) {
-
-    print(getClass().protectionDomain.codeSource.location.path)
-
-    Map map = libraryResource 'default.properties'
-    print(map)
-//    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
+    ApplicationProperties applicationProperties = new ApplicationProperties(libraryResource('default.properties'), jobParams)
 
     pipeline {
         agent any
@@ -12,7 +9,7 @@ def call(Map jobParams) {
             stage("works") {
                 steps {
                     script {
-                        for (Map.Entry entry : map.entrySet()) {
+                        for (Map.Entry entry : applicationProperties.testing().entrySet()) {
                             print("${entry.key} == ${entry.value}")
                         }
                     }
