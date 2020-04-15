@@ -9,7 +9,7 @@ def call(Map jsonMap) {
             stage("works") {
                 steps {
                     script {
-                        for (Map.Entry entry : map.entrySet()) {
+                        for (Map.Entry entry : applicationProperties.properties.entrySet()) {
                             print("${entry.key} == ${entry.value}")
                         }
                     }
