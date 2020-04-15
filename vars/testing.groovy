@@ -3,7 +3,8 @@ def call(Map jobParams) {
     print(getClass().protectionDomain.codeSource.location.path)
 
     Properties props = new Properties()
-    File propsFile = new File(getClass().protectionDomain.codeSource.location.path+'/../resources/default.properties')
+    String path = libraryResource '/default.properties'
+    File propsFile = new File(path)
     props.load(propsFile.newDataInputStream())
     print(props)
 //    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
