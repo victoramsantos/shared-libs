@@ -3,8 +3,14 @@ package libs.utils
 class ApplicationProperties {
     private Map applicationProperties
 
-    ApplicationProperties(Map defaultProperties, Map applicationProperties){
-        this.applicationProperties = defaultProperties + applicationProperties
+//    ApplicationProperties(Map defaultProperties, Map applicationProperties){
+//        this.applicationProperties = defaultProperties + applicationProperties
+//    }
+
+    ApplicationProperties(Map... maps){
+        maps.each { map ->
+            this.applicationProperties += map
+        }
     }
 
     String getString(String key) {

@@ -49,6 +49,9 @@ def call(Map jobParams) {
             always {
                 cleanWs()
             }
+            success {
+
+            }
         }
     }
 }
