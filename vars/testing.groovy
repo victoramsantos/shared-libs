@@ -2,7 +2,9 @@ import libs.utils.ApplicationProperties
 
 def call(Map jobParams) {
     ApplicationProperties applicationProperties = new ApplicationProperties(
-            ApplicationProperties.parseKeyValueStringToMap(libraryResource('default.properties')) as String,
+            ApplicationProperties.parseKeyValueStringToMap(
+                    libraryResource('default.properties') as String
+            ),
             jobParams
     )
 
