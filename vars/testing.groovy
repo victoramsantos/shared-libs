@@ -1,7 +1,7 @@
 import libs.utils.ApplicationProperties
 
 def call(Map jobParams) {
-    Map defaultProperties = readProperties file: 'resources/default.properties'
+    Map defaultProperties = readFile file: 'resources/default.properties'
     ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
 
     pipeline {
