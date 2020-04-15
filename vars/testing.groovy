@@ -1,17 +1,12 @@
-import libs.utils.ApplicationProperties
-
 def call(Map jobParams) {
-    print(System.getProperty("user.dir"))
+
     print(getClass().protectionDomain.codeSource.location.path)
-    print(new File(".").getAbsolutePath())
-    print("${env.WORKSPACE}")
-    print("${WORKSPACE}")
 
     Properties props = new Properties()
-    File propsFile = new File('resources/default.properties')
+    File propsFile = new File(getClass().protectionDomain.codeSource.location.path+'../resources/default.properties')
     props.load(propsFile.newDataInputStream())
     print(props)
-    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
+//    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
 
     pipeline {
         agent any
@@ -19,7 +14,7 @@ def call(Map jobParams) {
             stage("works") {
                 steps {
                     script {
-                        for (Map.Entry entry : applicationProperties.testing()) {
+                        for (Map.Entry entry : props.entrySet()) {
                             print("${entry.key} == ${entry.value}")
                         }
                     }
