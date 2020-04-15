@@ -1,6 +1,9 @@
 import libs.utils.ApplicationProperties
 
 def call(Map jobParams) {
+    print(System.getProperty("user.dir"))
+
+
     Properties props = new Properties()
     File propsFile = new File('resources/default.properties')
     props.load(propsFile.newDataInputStream())
