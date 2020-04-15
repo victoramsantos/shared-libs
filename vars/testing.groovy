@@ -1,8 +1,9 @@
 import libs.utils.ApplicationProperties
 import libs.utils.Utils
+import trigger.JobTrigger
 
 def call(Map jobParams) {
-    Map defaultProperties = Utils.parsePropertyFile(this,"default.properties")
+    Map defaultProperties = Utils.parsePropertyFile(this, "default.properties")
     ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
 
     pipeline {
@@ -22,12 +23,10 @@ def call(Map jobParams) {
             always {
                 cleanWs()
             }
-            success{
-                script{
-                    load("testingcd.groovy").call(applicationProperties)
+            success {
+                script {
+                    JobTrigger.trigger(this, applicationProperties)
                 }
-
-//                JobTrigger.trigger()
             }
         }
     }
