@@ -3,7 +3,7 @@ package libs.utils
 class ApplicationProperties {
     private Map applicationProperties
 
-    ApplicationProperties(String defaultProperties, Map applicationProperties){
+    ApplicationProperties(Map defaultProperties, Map applicationProperties){
         this.applicationProperties = defaultProperties + applicationProperties
     }
 
