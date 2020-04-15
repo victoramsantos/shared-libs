@@ -4,6 +4,7 @@ def call(Map jobParams) {
 
     Properties props = new Properties()
     String path = libraryResource '/default.properties'
+    print(path)
     File propsFile = new File(path)
     props.load(propsFile.newDataInputStream())
     print(props)
