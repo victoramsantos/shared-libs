@@ -13,9 +13,9 @@ class Utils {
         return map
     }
 
-    static Map parsePropertyFile(String fileName){
+    static Map parsePropertyFile(def context, String fileName){
         return parseKeyValueStringToMap(
-                libraryResource(fileName) as String
+                context.libraryResource(fileName) as String
         )
     }
 }
