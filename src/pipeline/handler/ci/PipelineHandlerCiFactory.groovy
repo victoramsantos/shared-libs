@@ -1,11 +1,13 @@
 package pipeline.handler.ci
 
 import libs.utils.ApplicationProperties
+import pipeline.context.PipelineContext
 import pipeline.handler.ci.language.PythonCi
 
 class PipelineHandlerCiFactory {
 
-    static PipelineHandlerCi build(ApplicationProperties applicationProperties){
+    static PipelineHandlerCi build(def context, ApplicationProperties applicationProperties){
+        PipelineContext.init(context)
         PipelineHandlerCi pipelineHandlerCi
         CiTypes ciTypes = CiTypes.valueOf(applicationProperties.getString("PIPELINE_CI"))
 
