@@ -1,6 +1,8 @@
 def call(Map jobParams) {
 
-    print(jobParams["PIPELINE_CI"])
+    for(Map.Entry entry: jobParams){
+        print("${entry.key} == ${entry.value}")
+    }
 //    def params = [:]
 //    body.resolveStrategy = Closure.DELEGATE_FIRST
 //    body.delegate = params
