@@ -2,7 +2,7 @@ import libs.utils.ApplicationProperties
 import libs.utils.Utils
 
 def call(Map jsonMap) {
-    ApplicationProperties applicationProperties = new ApplicationProperties(Utils.p)
+    ApplicationProperties applicationProperties = new ApplicationProperties(Utils.parseJsonMapToMap(jsonMap))
     pipeline {
         agent any
         stages {

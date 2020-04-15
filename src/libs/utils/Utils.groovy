@@ -24,8 +24,8 @@ class Utils {
         return JsonOutput.toJson(map)
     }
 
-    static parseJsonMapToMap(Map jsonMap, String mapKey = "jsonMap"){
+    static Map parseJsonMapToMap(Map jsonMap, String mapKey = "jsonMap"){
         JsonSlurper jsonSlurper = new JsonSlurper()
-        return jsonSlurper.parseText(jsonMap.get(mapKey) as String)
+        return jsonSlurper.parseText(jsonMap.get(mapKey) as String) as Map
     }
 }
