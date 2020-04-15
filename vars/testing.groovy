@@ -4,6 +4,8 @@ def call(Map jobParams) {
     print(System.getProperty("user.dir"))
     print(getClass().protectionDomain.codeSource.location.path)
     print(new File(".").getAbsolutePath())
+    print("${env.WORKSPACE}")
+    print("${WORKSPACE}")
 
     Properties props = new Properties()
     File propsFile = new File('resources/default.properties')
