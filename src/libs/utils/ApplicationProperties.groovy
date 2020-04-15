@@ -18,7 +18,7 @@ class ApplicationProperties {
         this.applicationProperties[key] = value
     }
 
-    Map getApplicationProperties(){
+    Map getProperties(){
         return this.applicationProperties
     }
 }

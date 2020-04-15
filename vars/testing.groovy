@@ -11,7 +11,7 @@ def call(Map jobParams) {
             stage("works") {
                 steps {
                     script {
-                        for (Map.Entry entry : applicationProperties.getApplicationProperties().entrySet()) {
+                        for (Map.Entry entry : applicationProperties.getProperties().entrySet()) {
                             print("${entry.key} == ${entry.value}")
                         }
                     }
