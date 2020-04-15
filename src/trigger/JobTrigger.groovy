@@ -6,7 +6,7 @@ import libs.utils.Utils
 class JobTrigger {
     static void trigger(def context, ApplicationProperties applicationProperties) {
         String job = selectJob(applicationProperties)
-        String jsonMap = Utils.parseMapToJson(applicationProperties.properties)
+        String jsonMap = Utils.parseMapToJsonMap(applicationProperties.properties)
 
         context.build(
                 job: job,

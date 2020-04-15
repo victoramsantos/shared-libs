@@ -20,12 +20,12 @@ class Utils {
         )
     }
 
-    static parseMapToJson(Map map){
+    static String parseMapToJsonMap(Map map){
         return JsonOutput.toJson(map)
     }
 
-    static parseJsonToMap(String json){
+    static parseJsonMapToMap(Map jsonMap, String mapKey = "jsonMap"){
         JsonSlurper jsonSlurper = new JsonSlurper()
-        return jsonSlurper.parseText(json)
+        return jsonSlurper.parseText(jsonMap.get(mapKey) as String)
     }
 }
