@@ -2,6 +2,9 @@ import libs.utils.ApplicationProperties
 import libs.utils.Utils
 import pipeline.handler.ci.PipelineHandlerCi
 import pipeline.handler.ci.PipelineHandlerCiFactory
+import trigger.JobTrigger
+
+import static trigger.JobTrigger.*
 
 def call(Map jobParams) {
     Map defaultProperties = Utils.parsePropertyFile(this,"default.properties")
@@ -48,7 +51,9 @@ def call(Map jobParams) {
                 cleanWs()
             }
             success {
-
+                script {
+                    trigger(this, applicationProperties)
+                }
             }
         }
     }

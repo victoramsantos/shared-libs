@@ -2,6 +2,8 @@ import libs.utils.ApplicationProperties
 import libs.utils.Utils
 import trigger.JobTrigger
 
+import static trigger.JobTrigger.trigger
+
 def call(Map jobParams) {
     Map defaultProperties = Utils.parsePropertyFile(this, "default.properties")
     ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
@@ -25,7 +27,7 @@ def call(Map jobParams) {
             }
             success {
                 script {
-                    JobTrigger.trigger(this, applicationProperties)
+                    trigger(this, applicationProperties)
                 }
             }
         }
