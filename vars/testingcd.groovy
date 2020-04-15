@@ -1,6 +1,4 @@
-import libs.utils.ApplicationProperties
-
-def call(ApplicationProperties applicationProperties) {
+def call(Map map) {
     print("testingcd")
     pipeline {
         agent any
@@ -8,7 +6,7 @@ def call(ApplicationProperties applicationProperties) {
             stage("works") {
                 steps {
                     script {
-                        for (Map.Entry entry : applicationProperties.getApplicationProperties().entrySet()) {
+                        for (Map.Entry entry : map.entrySet()) {
                             print("${entry.key} == ${entry.value}")
                         }
                     }
