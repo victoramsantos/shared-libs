@@ -18,16 +18,4 @@ class ApplicationProperties {
     Map testing(){
         return this.applicationProperties
     }
-
-    static Map parseKeyValueStringToMap(String keyValueString, String delimiterLine = "\n", String delimiter = "="){
-        Map map = new HashMap()
-        String[] lines = keyValueString.split(delimiterLine)
-
-        for(String line: lines){
-            String[] keyValue = line.split(delimiter)
-            map.put(keyValue[0], keyValue[1])
-        }
-
-        return map
-    }
 }

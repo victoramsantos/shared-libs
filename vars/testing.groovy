@@ -1,12 +1,9 @@
 import libs.utils.ApplicationProperties
+import libs.utils.Utils
 
 def call(Map jobParams) {
-    ApplicationProperties applicationProperties = new ApplicationProperties(
-            ApplicationProperties.parseKeyValueStringToMap(
-                    libraryResource('default.properties') as String
-            ),
-            jobParams
-    )
+    Map defaultProperties = Utils.parsePropertyFile("default.properties")
+    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties,jobParams)
 
     pipeline {
         agent any
