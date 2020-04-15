@@ -35,10 +35,10 @@ abstract class GenericCi implements PipelineHandlerCi {
 
     @Override
     void buildDockerImage() {
-        String repository = "397823652972.dkr.ecr.us-east-1.amazonaws.com"
+        String repository = this.applicationProperties.getString("ECR_REPOSITORY")
         String applicationName = this.applicationProperties.getString("APPLICATION_NAME")
         String tag = this.applicationProperties.getString("SHORT_HASH_COMMIT")
-        String region = "us-east-1"
+        String region = this.applicationProperties.getString("REGION")
 
         Docker docker = new DockerEcr()
 

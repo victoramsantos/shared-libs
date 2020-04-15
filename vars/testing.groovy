@@ -1,17 +1,17 @@
-def call(Map jobParams) {
+import libs.utils.ApplicationProperties
 
-    for(Map.Entry entry: jobParams){
-        print("${entry.key} == ${entry.value}")
-    }
+def call(Map jobParams) {
+    Map defaultProperties = readProperties text: libraryResource 'resources/default.properties'
+    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
 
     pipeline {
         agent any
         stages {
-            stage("works?") {
+            stage("works") {
                 steps {
                     script {
-                        for(Map.Entry entry: jobParams){
-                            echo "${entry.key} == ${entry.value}"
+                        for (Map.Entry entry : applicationProperties.testing()) {
+                            print("${entry.key} == ${entry.value}")
                         }
                     }
                 }

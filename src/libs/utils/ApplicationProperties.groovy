@@ -3,8 +3,8 @@ package libs.utils
 class ApplicationProperties {
     private Map applicationProperties
 
-    ApplicationProperties(Map applicationProperties){
-        this.applicationProperties = applicationProperties
+    ApplicationProperties(Map defaultProperties, Map applicationProperties){
+        this.applicationProperties = defaultProperties + applicationProperties
     }
 
     String getString(String key) {
@@ -13,5 +13,9 @@ class ApplicationProperties {
 
     void add(String key, String value) {
         this.applicationProperties[key] = value
+    }
+
+    Map testing(){
+        return this.applicationProperties
     }
 }

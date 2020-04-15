@@ -3,15 +3,11 @@ import pipeline.context.PipelineContext
 import pipeline.handler.ci.PipelineHandlerCi
 import pipeline.handler.ci.PipelineHandlerCiFactory
 
-def call(body) {
-    def params = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = params
-    body()
-
-    PipelineContext.init(this)
-    ApplicationProperties applicationProperties = new ApplicationProperties(params)
+def call(Map jobParams) {
+    Map defaultProperties = readProperties text: libraryResource 'resources/default.properties'
+    ApplicationProperties applicationProperties = new ApplicationProperties(defaultProperties, jobParams)
     PipelineHandlerCi pipelineHandler = PipelineHandlerCiFactory.build(applicationProperties)
+    PipelineContext.init(this)
 
     pipeline {
         agent any
