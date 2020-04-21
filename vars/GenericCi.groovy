@@ -2,9 +2,8 @@ import libs.utils.ApplicationProperties
 import libs.utils.Utils
 import pipeline.handler.ci.PipelineHandlerCi
 import pipeline.handler.ci.PipelineHandlerCiFactory
-import trigger.JobTrigger
 
-import static trigger.JobTrigger.*
+import static trigger.JobTrigger.trigger
 
 def call(Map jobParams) {
     Map defaultProperties = Utils.parsePropertyFile(this,"default.properties")

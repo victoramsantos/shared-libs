@@ -21,4 +21,9 @@ class ApplicationProperties {
     Map getProperties(){
         return this.applicationProperties
     }
+
+    @Override
+    String toString() {
+        return Utils.parseMapToJsonMap(this.applicationProperties)
+    }
 }

@@ -13,16 +13,7 @@ def call(Map jsonMap) {
             stage("Cloning project") {
                 steps {
                     script {
-                        pipelineHandler.scmClone()
-                    }
-                }
-            }
-            stage("Building and testing") {
-                steps {
-                    dir("${applicationProperties.getString("APPLICATION_PATH")}") {
-                        script {
-                            pipelineHandler.buildAndTest()
-                        }
+                        echo "${applicationProperties.toString()}"
                     }
                 }
             }
