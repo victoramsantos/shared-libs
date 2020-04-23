@@ -44,7 +44,7 @@ abstract class GenericCd implements PipelineHandlerCd {
 
         Utils.sed(
                 filePath,
-                "\$REPOSITORY",
+                "\$REGISTRY",
                 imageRepository
         )
 
