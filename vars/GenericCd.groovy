@@ -17,8 +17,6 @@ def call(Map jsonMap) {
                     }
                 }
             }
-        }
-        stages {
             stage("Creating service") {
                 steps {
                     script {
