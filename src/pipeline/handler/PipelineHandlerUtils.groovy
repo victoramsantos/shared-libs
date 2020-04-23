@@ -16,7 +16,7 @@ class PipelineHandlerUtils {
                 repository,
                 applicationName,
                 branch
-        )
+        ) + "/"
         String shortHashCommit = scm.getShortHashCommit(applicationPath, branch)
         Log.info("Using applicationPath as $applicationPath with shortHashCommit: $shortHashCommit")
         applicationProperties.add("APPLICATION_PATH", applicationPath)
