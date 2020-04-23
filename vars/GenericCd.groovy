@@ -24,8 +24,6 @@ def call(Map jsonMap) {
                     }
                 }
             }
-        }
-        stages {
             stage("Applying deployment") {
                 steps {
                     script {
