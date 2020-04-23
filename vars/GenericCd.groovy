@@ -13,7 +13,25 @@ def call(Map jsonMap) {
             stage("Cloning project") {
                 steps {
                     script {
-                        echo "${applicationProperties.toString()}"
+                        pipelineHandler.scmClone()
+                    }
+                }
+            }
+        }
+        stages {
+            stage("Creating service") {
+                steps {
+                    script {
+                        pipelineHandler.creatingService()
+                    }
+                }
+            }
+        }
+        stages {
+            stage("Applying deployment") {
+                steps {
+                    script {
+                        pipelineHandler.applyingDeployment()
                     }
                 }
             }

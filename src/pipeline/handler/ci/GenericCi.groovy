@@ -2,10 +2,8 @@ package pipeline.handler.ci
 
 import libs.docker.Docker
 import libs.docker.DockerEcr
-import libs.tool.sourcecontrolmanagement.Git
-import libs.tool.sourcecontrolmanagement.SCM
 import libs.utils.ApplicationProperties
-import libs.utils.Log
+import pipeline.handler.PipelineHandlerUtils
 
 abstract class GenericCi implements PipelineHandlerCi {
 
@@ -17,20 +15,7 @@ abstract class GenericCi implements PipelineHandlerCi {
 
     @Override
     void scmClone() {
-        String repository = this.applicationProperties.getString("REPOSITORY")
-        String applicationName = this.applicationProperties.getString("APPLICATION_NAME")
-        String branch = this.applicationProperties.getString("BRANCH")
-
-        SCM scm = new Git()
-        String applicationPath = scm.cloneAndCheckout(
-                repository,
-                applicationName,
-                branch
-        )
-        String shortHashCommit = scm.getShortHashCommit(applicationPath, branch)
-        Log.info("Using applicationPath as $applicationPath with shortHashCommit: $shortHashCommit")
-        this.applicationProperties.add("APPLICATION_PATH", applicationPath)
-        this.applicationProperties.add("SHORT_HASH_COMMIT", shortHashCommit)
+        PipelineHandlerUtils.scmClone(this.applicationProperties)
     }
 
     @Override
