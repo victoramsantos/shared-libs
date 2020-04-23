@@ -3,7 +3,6 @@ package pipeline.handler.cd
 import libs.kubectl.Kubectl
 import libs.utils.ApplicationProperties
 import libs.utils.Utils
-import pipeline.context.PipelineContext
 import pipeline.handler.PipelineHandlerUtils
 
 abstract class GenericCd implements PipelineHandlerCd {
@@ -25,10 +24,9 @@ abstract class GenericCd implements PipelineHandlerCd {
         String serviceFilePath = this.applicationProperties.getString("SERVICE_FILE_PATH")
 
         String filePath = applicationPath + serviceFilePath
-        PipelineContext.shell("cat $filePath")
 
-//        Kubectl kubectl = new Kubectl()
-//        kubectl.applyService(serviceFilePath)
+        Kubectl kubectl = new Kubectl()
+        kubectl.applyService(filePath)
     }
 
     @Override
@@ -39,8 +37,6 @@ abstract class GenericCd implements PipelineHandlerCd {
         String deploymentFilePath = this.applicationProperties.getString("DEPLOYMENT_FILE_PATH")
 
         String filePath = applicationPath + deploymentFilePath
-
-//        Kubectl kubectl = new Kubectl()
 
         Utils.sed(
                 filePath,
@@ -54,7 +50,7 @@ abstract class GenericCd implements PipelineHandlerCd {
                 tag
         )
 
-        PipelineContext.shell("cat $filePath")
-
+        Kubectl kubectl = new Kubectl()
+        kubectl.applyDeployment(filePath)
     }
 }
