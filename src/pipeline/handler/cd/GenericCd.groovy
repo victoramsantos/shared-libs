@@ -36,7 +36,7 @@ abstract class GenericCd implements PipelineHandlerCd {
         String imageRepository = this.applicationProperties.getString("ECR_REPOSITORY")
         String tag = this.applicationProperties.getString("SHORT_HASH_COMMIT")
         String applicationPath = this.applicationProperties.getString("APPLICATION_PATH")
-        String deploymentFilePath = this.applicationProperties.getString("SERVICE_FILE_PATH")
+        String deploymentFilePath = this.applicationProperties.getString("DEPLOYMENT_FILE_PATH")
 
         String filePath = applicationPath + deploymentFilePath
 
