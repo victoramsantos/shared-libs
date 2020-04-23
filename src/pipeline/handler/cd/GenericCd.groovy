@@ -3,6 +3,7 @@ package pipeline.handler.cd
 import libs.kubectl.Kubectl
 import libs.utils.ApplicationProperties
 import libs.utils.Utils
+import pipeline.context.PipelineContext
 import pipeline.handler.PipelineHandlerUtils
 
 abstract class GenericCd implements PipelineHandlerCd {
@@ -24,6 +25,8 @@ abstract class GenericCd implements PipelineHandlerCd {
         String serviceFilePath = this.applicationProperties.getString("SERVICE_FILE_PATH")
 
         String filePath = applicationPath + serviceFilePath
+
+        PipelineContext.shell("kubectl get nodes")
 
         Kubectl kubectl = new Kubectl()
         kubectl.applyService(filePath)
