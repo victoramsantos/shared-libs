@@ -6,13 +6,13 @@ import static pipeline.context.PipelineContext.shell
 class Kubectl {
     void applyService(String filePath) {
         shell(
-                "kubectl apply -f $filePath"
+                "kubectl apply service -f $filePath"
         )
     }
 
     void applyDeployment(String filePath) {
         shell(
-                "kubectl apply -f $filePath"
+                "kubectl apply deployment -f $filePath"
         )
     }
 }
