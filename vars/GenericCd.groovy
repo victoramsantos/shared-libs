@@ -17,13 +17,6 @@ def call(Map jsonMap) {
                     }
                 }
             }
-            stage("Creating service") {
-                steps {
-                    script {
-                        pipelineHandler.creatingService()
-                    }
-                }
-            }
             stage("Applying deployment") {
                 steps {
                     script {
