@@ -1,0 +1,39 @@
+package libs.utils
+
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+import static pipeline.context.PipelineContext.shell
+
+class Utils {
+    static Map parseKeyValueStringToMap(String keyValueString, String delimiterLine = "\n", String delimiter = "=") {
+        Map map = new HashMap()
+        keyValueString.split(delimiterLine).each { line ->
+            String[] keyValue = line.split(delimiter)
+            map.put(keyValue[0], keyValue[1])
+        }
+
+        return map
+    }
+
+    static Map parsePropertyFile(def context, String fileName) {
+        return parseKeyValueStringToMap(
+                context.libraryResource(fileName) as String
+        )
+    }
+
+    static String parseMapToJsonMap(Map map) {
+        return JsonOutput.toJson(map)
+    }
+
+    static Map parseJsonMapToMap(Map jsonMap, String mapKey = "jsonMap") {
+        JsonSlurper jsonSlurper = new JsonSlurper()
+        return jsonSlurper.parseText(jsonMap.get(mapKey) as String) as Map
+    }
+
+    static void sed(String file, String placeholder, String replacement) {
+        shell(
+                "sed -i 's/$placeholder/$replacement/' $file"
+        )
+    }
+}
